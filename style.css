@@ -1,0 +1,352 @@
+/* Importamos las fuentes que usaremos */
+@import url('https://fonts.googleapis.com/css2?family=Edu+NSW+ACT+Hand+Pre:wght@400..700&family=Playfair+Display:wght@400;700&display=swap');
+
+/* --- Ajustes para el Scroll Suavizado (Lenis) --- */
+html {
+  scroll-behavior: auto !important; /* Es importante desactivar el scroll-behavior nativo */
+}
+
+/* --- Estilos Generales --- */
+* { box-sizing: border-box; }
+html {
+  scroll-snap-type: y mandatory;
+  scroll-behavior: smooth;
+  scroll-snap-stop: always;
+}
+body {
+  margin: 0;
+  background-color: #fff; 
+  color: #333333;
+  font-family: 'Lato', sans-serif;
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+body::-webkit-scrollbar { display: none; }
+
+/* --- 1. Pantalla de Introducción --- */
+#intro-screen {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  height: 100vh;
+  width: 100%;
+  position: fixed;
+  top: 0;
+  left: 0;
+  background-color: #fff;
+  transition: opacity 1.5s ease-out;
+  z-index: 10;
+}
+/* Reemplaza la regla para el texto principal de la intro */
+#intro-screen p {
+  font-family: 'Playfair Display', serif;
+  /* Aumentamos todos los valores para un texto más grande */
+  font-size: clamp(1.8rem, 6vw, 2.8rem); 
+  margin-top: 25px; /* Aumentamos un poco la separación */
+}
+
+/* Reemplaza la regla para el texto secundario "(Desliza...)" */
+#intro-screen span {
+  /* Aumentamos también el tamaño de este texto */
+  font-size: clamp(1.1rem, 3vw, 1.4rem); 
+  color: #666666;
+  margin-top: 15px;
+}
+#start-heart {
+  background: none; border: none; padding: 0; cursor: pointer;
+}
+
+/* --- 2. Contenido de la Historia --- */
+#story {
+  padding: 0;
+  opacity: 0;
+  transition: opacity 1.5s ease-in;
+  /* Hacemos que la sección sea invisible hasta que se llene y se active */
+  visibility: hidden;
+}
+
+#story.visible {
+    opacity: 1;
+    visibility: visible;
+}
+
+/* ESTA ES LA CORRECCIÓN CLAVE PARA EL CENTRADO */
+/* El estilo de layout se aplica al CONTENEDOR de cada sección */
+.story-section {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  height: 100vh;
+  width: 100%;
+  padding: 20px;
+  scroll-snap-align: center;
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+}
+
+/* La clase .active hará visible cada sección */
+.story-section.active {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* El estilo de tipografía se aplica al TEXTO dentro del contenedor */
+.story-section h1, .story-section p {
+  font-family: 'Edu NSW ACT Hand Pre', cursive;
+  font-size: clamp(1.8rem, 5vw, 2.8rem);
+  font-weight: 500;
+  line-height: 1.6; 
+  max-width: 650px;
+  margin: 0;
+}
+.story-section h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(2.5rem, 10vw, 4.5rem);
+}
+.story-section #mensaje-final {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(2rem, 8vw, 3.5rem);
+    margin-top: 20px;
+}
+
+#final-container img {
+  max-width: 80%;
+  border-radius: 15px;
+  box-shadow: 0 4px 25px rgba(0, 0, 0, 0.1);
+  margin-bottom: 20px;
+}
+
+/* --- Partículas --- */
+#particle-container {
+  position: fixed; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; z-index: 1;
+}
+.heart-particle {
+  position: absolute; font-size: 20px; color: #ff4757;
+}
+
+/* --- AÑADE ESTO AL FINAL DE TU CSS --- */
+
+/* Ajustes para el contenedor de la animación Vara.js */
+#titulo-animado {
+  /* El contenedor usará el ancho disponible */
+  width: 100%;
+  max-width: 650px; /* Igual que el texto normal */
+}
+
+
+/* --- AÑADE ESTO AL FINAL DE TU CSS --- */
+
+/* Contenedor para el título SVG */
+#titulo-svg-container {
+  width: 100%;
+  max-width: 650px;
+}
+
+/* Estilos para los trazados del SVG */
+#titulo-svg-container path {
+  /* Hacemos que el relleno sea transparente y definimos el color y grosor del trazo */
+  stroke: #333333; /* Color de la "tinta" */
+  stroke-width: 1; /* Grosor de la línea, puedes ajustarlo */
+  fill-opacity: 0; /* Relleno invisible al principio */
+}
+
+/* Contenedor para el título SVG */
+#titulo-svg-container {
+  width: 100%;
+  max-width: 650px;
+  /* Añadimos un poco de padding para que no se pegue a los bordes en pantallas pequeñas */
+  padding: 0 20px; 
+}
+
+/* El SVG que generamos ocupará todo el ancho de su contenedor */
+#titulo-svg-container svg {
+    width: 100%;
+    height: auto;
+    /* Movemos el overflow aquí para evitar cortes inesperados */
+    overflow: visible;
+}
+
+/* Estilos para los trazados del SVG */
+#titulo-svg-container path {
+  stroke: #333333; /* Color de la "tinta" */
+  stroke-width: 1; /* Grosor de la línea */
+  fill-opacity: 0; /* Relleno invisible al principio */
+}
+
+/* --- Estilos para la Animación del Título con Vara.js --- */
+
+/* Contenedor para la animación.
+  Le damos un ancho máximo para que coincida con el resto del texto
+  y una altura mínima para evitar que la página "salte" mientras se carga la animación.
+*/
+#titulo-animado {
+  width: 100%;
+  max-width: 650px; /* Coincide con el max-width de los párrafos */
+  min-height: 150px; /* Ajusta este valor si el texto se corta en pantallas grandes */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* El SVG que genera Vara.js.
+  Nos aseguramos de que sea responsive y ocupe el espacio de su contenedor.
+*/
+#titulo-animado svg {
+    width: 100%;
+    height: auto;
+}
+
+/* --- Estilos para la Animación del Mensaje Final --- */
+#final-animado-container {
+  width: 100%;
+  max-width: 650px;
+  min-height: 100px; /* Evita saltos de página */
+  margin-top: 20px;
+}
+
+#final-animado-container svg {
+    width: 100%;
+    height: auto;
+    /* La propiedad 'y' en la configuración de Vara.js nos ayuda a centrarlo verticalmente */
+}
+
+/* Ajustamos el p original para que no aparezca */
+.story-section #mensaje-final {
+  display: none; 
+}
+
+/* --- Estilos para las Secciones con Imagen --- */
+
+/* Contenedor de la estrofa con imagen */
+.story-section.has-image {
+  flex-direction: column; /* Apila imagen y texto verticalmente */
+  justify-content: center;
+  gap: 2rem; /* Espacio entre la imagen y el texto */
+}
+
+/* Contenedor de la imagen. Clave para las animaciones. */
+.imagen-container {
+  width: 100%;
+  max-width: 300px; /* Ajusta el tamaño de la imagen */
+  aspect-ratio: 3 / 4; /* Proporción de la imagen (ancho / alto) */
+  border-radius: 12px;
+  overflow: hidden; /* Esconde las partes de la imagen que se salgan al hacer zoom */
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+  /* Transición para el efecto de seguir al cursor */
+  transition: transform 0.6s cubic-bezier(0.23, 1, 0.32, 1);
+}
+
+.imagen-container img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover; /* Asegura que la imagen cubra todo el contenedor sin deformarse */
+  
+  /* Estado inicial de la animación de zoom (ligeramente pequeña y opaca) */
+  transform: scale(1.15);
+  opacity: 0;
+  
+  /* Transición para la animación de zoom. Puedes ajustar la duración y el 'easing' */
+  transition: transform 1.2s cubic-bezier(0.165, 0.84, 0.44, 1),
+              opacity 1s cubic-bezier(0.165, 0.84, 0.44, 1);
+}
+
+/* Estado final de la animación de zoom (cuando la sección está activa) */
+.story-section.active .imagen-container img {
+  transform: scale(1); /* Vuelve a su tamaño normal */
+  opacity: 1; /* Se hace completamente visible */
+}
+
+/* Estilos para el texto de las estrofas con imagen */
+.story-section.has-image p {
+  font-size: clamp(1.5rem, 4vw, 2.2rem); /* Hacemos el texto un poco más pequeño */
+  max-width: 550px;
+}
+
+/* --- REGLAS PARA OCULTAR LA BARRA DE SCROLL --- */
+body {
+  -ms-overflow-style: none;  /* IE and Edge */
+  scrollbar-width: none;  /* Firefox */
+}
+body::-webkit-scrollbar {
+  display: none;  /* Chrome, Safari and Opera */
+}
+
+/* --- AJUSTES PARA DISPOSITIVOS MÓVILES (MEDIA QUERY) --- */
+/* Estas reglas se aplicarán solo si el ancho de la pantalla es de 768px o menos */
+
+@media (max-width: 768px) {
+
+  /* Hacemos que la sección tenga un poco menos de padding horizontal */
+  .story-section {
+    padding: 20px 15px;
+  }
+  
+  /* Contenedor de la imagen en estrofas */
+  .imagen-container {
+    /* Hacemos la imagen significativamente más grande en móviles */
+    width: 85%;
+    max-width: 340px; /* Un límite para que no se vea gigante en móviles anchos */
+  }
+
+  /* Reducimos el espacio entre la imagen y el texto */
+  .story-section.has-image {
+    gap: 1.5rem; 
+  }
+
+  /* Párrafos en las estrofas con imagen */
+  .story-section.has-image p {
+    /* Permitimos que el texto ocupe casi todo el ancho disponible */
+    max-width: 90%;
+    /* Hacemos la fuente un poco más grande en móviles */
+    font-size: clamp(1.6rem, 5vw, 2.4rem);
+  }
+
+  /* Ajustamos la imagen final para que no sea tan alta en pantallas cortas */
+  #final-container img {
+    max-height: 35vh;
+  }
+}
+
+/* --- ESTILOS PARA EL PRELOADER --- */
+
+/* El loader será un círculo que gira. Lo ocultamos por defecto. */
+#loader {
+  width: 50px;
+  height: 50px;
+  border: 5px solid rgba(0, 0, 0, 0.1);
+  border-top-color: #333333;
+  border-radius: 50%;
+  position: absolute; /* Lo posicionamos sobre la pantalla de intro */
+  top: 70%;
+  display: none; /* Oculto por defecto */
+  animation: spin 1s infinite linear;
+}
+
+/* Cuando la intro esté en modo "cargando"... */
+#intro-screen.loading #loader {
+  display: block; /* ...mostramos el loader. */
+}
+
+#intro-screen.loading p,
+#intro-screen.loading span,
+#intro-screen.loading #start-heart {
+  /* ...y ocultamos el resto del contenido de la intro con una transición suave. */
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.3s ease, visibility 0.3s ease;
+}
+
+/* Animación para que el círculo gire */
+@keyframes spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}

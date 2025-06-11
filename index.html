@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="es" >
+<head>
+  <meta charset="UTF-8">
+  <title>Nuestra Historia</title>
+  <link rel="stylesheet" href="./style.css">
+  <script
+    src="https://unpkg.com/@dotlottie/player-component@2.7.12/dist/dotlottie-player.mjs"
+    type="module"
+  ></script>
+  <script
+    src="https://unpkg.com/@dotlottie/player-component@2.7.12/dist/dotlottie-player.mjs"
+    type="module"
+  ></script>
+
+  <script src="https://cdn.jsdelivr.net/npm/vara@1.2.0/src/vara.min.js" type="text/javascript"></script>
+
+</head>
+<body>
+  <main>
+    <div id="particle-container"></div>
+
+    <section id="intro-screen">
+      <button id="start-heart" title="Toca para empezar">
+        <dotlottie-player
+          src="https://lottie.host/e3e5324e-3717-462c-a0cf-f4b8a46197c7/bH2rX7QQnl.lottie"
+          background="transparent"
+          speed="1"
+          style="width: 300px; height: 300px"
+          loop
+          autoplay
+        ></dotlottie-player>
+      </button>
+      <p>8 meses de nuestra historia...</p>
+      <span>(Toca para empezar)</span>
+      <div id="loader"></div>
+    </section>
+
+    <section id="story"></section>
+
+  </main>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js"></script>
+  <script src="https://rawcdn.githack.com/akzhy/Vara/c55a1b40c15b808cdd4a047de95c905094be87db/src/vara.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@studio-freight/lenis@1.0.42/dist/lenis.min.js"></script>
+  <script src="./script.js"></script>
+</body>
+</html>
