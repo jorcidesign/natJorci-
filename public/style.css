@@ -350,3 +350,11 @@ body::-webkit-scrollbar {
     transform: rotate(360deg);
   }
 }
+
+/* Párrafos en las estrofas con imagen */
+.story-section.has-image p {
+  /* Permitimos que el texto ocupe casi todo el ancho disponible */
+  max-width: 90%;
+  /* Hacemos la fuente un poco más grande en móviles */
+  font-size: clamp(1.6rem, 5vw, 2.4rem);
+}
