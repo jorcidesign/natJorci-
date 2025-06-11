@@ -129,6 +129,14 @@ body::-webkit-scrollbar { display: none; }
   position: absolute; font-size: 20px; color: #ff4757;
 }
 
+
+/* Párrafos en las estrofas con imagen */
+.story-section.has-image p {
+  /* Permitimos que el texto ocupe casi todo el ancho disponible */
+  max-width: 90%;
+  /* Hacemos la fuente un poco más grande en móviles */
+  font-size: clamp(1.6rem, 5vw, 2.4rem);
+}
 /* --- AÑADE ESTO AL FINAL DE TU CSS --- */
 
 /* Ajustes para el contenedor de la animación Vara.js */
@@ -349,12 +357,4 @@ body::-webkit-scrollbar {
   to {
     transform: rotate(360deg);
   }
-}
-
-/* Párrafos en las estrofas con imagen */
-.story-section.has-image p {
-  /* Permitimos que el texto ocupe casi todo el ancho disponible */
-  max-width: 90%;
-  /* Hacemos la fuente un poco más grande en móviles */
-  font-size: clamp(1.6rem, 5vw, 2.4rem);
 }
