@@ -130,13 +130,7 @@ body::-webkit-scrollbar { display: none; }
 }
 
 
-/* Párrafos en las estrofas con imagen */
-.story-section.has-image p {
-  /* Permitimos que el texto ocupe casi todo el ancho disponible */
-  max-width: 90%;
-  /* Hacemos la fuente un poco más grande en móviles */
-  font-size: clamp(1.6rem, 5vw, 2.4rem);
-}
+
 /* --- AÑADE ESTO AL FINAL DE TU CSS --- */
 
 /* Ajustes para el contenedor de la animación Vara.js */
@@ -239,8 +233,8 @@ body::-webkit-scrollbar { display: none; }
 
 /* Contenedor de la imagen. Clave para las animaciones. */
 .imagen-container {
-  width: 100%;
-  max-width: 300px; /* Ajusta el tamaño de la imagen */
+  width: 90%;
+  max-width: 380px; /* Ajusta el tamaño de la imagen */
   aspect-ratio: 3 / 4; /* Proporción de la imagen (ancho / alto) */
   border-radius: 12px;
   overflow: hidden; /* Esconde las partes de la imagen que se salgan al hacer zoom */
@@ -269,10 +263,12 @@ body::-webkit-scrollbar { display: none; }
   opacity: 1; /* Se hace completamente visible */
 }
 
-/* Estilos para el texto de las estrofas con imagen */
+/* Párrafos en las estrofas con imagen */
 .story-section.has-image p {
-  font-size: clamp(1.5rem, 4vw, 2.2rem); /* Hacemos el texto un poco más pequeño */
-  max-width: 550px;
+  /* Permitimos que el texto ocupe casi todo el ancho disponible */
+  max-width: 90%;
+  /* Hacemos la fuente un poco más grande en móviles */
+  font-size: clamp(1.6rem, 5vw, 2.4rem);
 }
 
 /* --- REGLAS PARA OCULTAR LA BARRA DE SCROLL --- */
